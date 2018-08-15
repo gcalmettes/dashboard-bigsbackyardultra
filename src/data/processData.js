@@ -19,6 +19,29 @@ runnersData.forEach(runner => {
   runner.laps.forEach(lap => {
     lap.time = moment.duration(`00:${lap.time}`)
   })
+  
+  // add some stats for runner
+  runner.fastest = runner.laps.reduce((fastest, current, i) => {
+    return current.time.asSeconds() < fastest.time.asSeconds()
+      ? {time: current.time, lap: i+1, string: moment(current.time.as('milliseconds')).format('mm:ss')}
+      : fastest
+  }, {time: moment.duration(Infinity), lap: 0})
+  
+  runner.slowest = runner.laps.reduce((slowest, current, i) => {
+    return current.time.asSeconds() > slowest.time.asSeconds() 
+      ? {time: current.time, lap: i+1, string: moment(current.time.as('milliseconds')).format('mm:ss')}
+      : slowest
+  }, {time: moment.duration(0), lap: 0})
+  
+  runner.average = {time: moment.duration(
+    {seconds: runner.laps.reduce((sum, current) => {
+      sum += current.time.asSeconds()
+      return sum
+      }, 0
+      )/runner.numberOfLaps
+    })
+  }
+  runner.average.string = moment(runner.average.time.as('milliseconds')).format('mm:ss')
 })
 
 export default {

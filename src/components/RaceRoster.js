@@ -1,30 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {stratify as d3stratify, pack as d3pack} from 'd3-hierarchy'
 
 import RaceRosterTooltip from './RaceRosterTooltip.js'
 
 
-const margin = {top: 20, right: 20, bottom: 20, left: 20},
-      width = 350 - margin.left - margin.right,
-      height = 350 - margin.top - margin.bottom;
-
-
-// Declare layout
-const pack = d3pack()
-  .size([width - 2, height - 2])
-  .padding(3)
-
-const stratify = d3stratify()
-    .parentId(d => d.parent)
-    .id(d => d.bib)
-
-const colors = {
-  'M': '#aad28c',
-  'F': '#ffc38a'
-}
-
-
-export default class RaceRoster extends Component {
+export default class RaceRoster extends React.PureComponent {
   constructor(props){
     super(props)
     this.state = {
@@ -34,29 +14,69 @@ export default class RaceRoster extends Component {
       ],
     }
     this.isHovered = this.isHovered.bind(this)
+    this.isSelected = this.isSelected.bind(this)
   }
 
   isHovered(node){
     return node.id === this.props.hoveredBib
   }
 
+  isSelected(node){
+    return this.props.selectedBibs.includes(node.id)
+  }
+
   render() {
+    const {margins} = this.props,
+          width = this.props.width - margins.left - margins.right,
+          height = this.props.height - margins.top - margins.bottom
+
+    const stratify = d3stratify()
+      .parentId(d => d.parent)
+      .id(d => d.bib)
+
     const root = stratify(this.state.data)
       .sum(d => d.numberOfLaps)
+
+    // Declare layout
+    const pack = d3pack()
+      .size([width - 2, height - 2])
+      .padding(3)
+
     pack(root)
 
+    const colors = this.props.colorHash
+
     const runners = root.descendants().map(node => {
+      const isNodeSelected = this.isSelected(node)
+      const isNodeHovered = this.isHovered(node)
       return (
-        <g transform={`translate(${node.x}, ${node.y})`} key={`circle${node.id}`} 
+        <g transform={`translate(${node.x}, ${node.y})`} 
+           key = {`circle${node.id}`} 
            onMouseOver={() => this.props.onHover(node.id)}
-           onMouseOut={() => this.props.onHover(null)}
+           onMouseLeave={() => this.props.onHover(null)}
+           onClick={() => this.props.onClick(node.id)}
            style={{opacity: node.depth !== 0 && this.props.hoveredBib && !this.isHovered(node) && 0.3}}>
           <circle 
-            cx={0}
-            cy={0} 
-            r={node.r} 
-            fill={node.depth === 0 ? 'None' : this.isHovered(node) ? '#49ABF3' : colors[node.data.runner.gender]}
-            stroke="black"
+            cx = {0}
+            cy = {0} 
+            r = {node.r} 
+            fill = {
+              node.depth === 0 
+                ? 'None' 
+                : isNodeHovered 
+                  ? '#49ABF3' 
+                  : colors[node.data.runner.gender]
+            }
+            stroke = {
+              isNodeSelected
+                ? "red"
+                : "black" 
+            }
+            strokeWidth = {
+              isNodeSelected
+                ? "4px"
+                : "1px" 
+            }
           />
           { node.depth !== 0 && // if not root node add text
             (!this.isHovered(node)
@@ -79,8 +99,8 @@ export default class RaceRoster extends Component {
 
     return (
       <div style={{display: 'inline-block'}}>
-        <svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
-          <g transform={`translate(${margin.left}, ${margin.top})`}>
+        <svg width={width + margins.left + margins.right} height={height + margins.top + margins.bottom}>
+          <g transform={`translate(${margins.left}, ${margins.top})`}>
             {runners}
           </g>
         </svg>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const headerStyles = {
   fontFamily: 'Papyrus',
@@ -19,18 +19,16 @@ const dateStyle = {
 
 const formatDate = (date) => date.format("dddd, MMMM Do YYYY")
 
-export default class RaceTitle extends Component {
-  constructor(props){
-    super(props)
-    this.state = this.props.raceInfo
-  }
 
-  render() {
+class RaceTitle extends React.PureComponent {
+  render () {
     return (
-        <header style={{...headerStyles}}>
-          <h1 style={{...titleStyle}}>{this.state.name}</h1>
-          <h2 style={{...dateStyle}}>{formatDate(this.state.date)}</h2>
-        </header>
+      <header style={{...headerStyles}}>
+        <h1 style={{...titleStyle}}>{this.props.name}</h1>
+        <h2 style={{...dateStyle}}>{formatDate(this.props.date)}</h2>
+      </header>
     );
   }
 }
+
+export default RaceTitle
