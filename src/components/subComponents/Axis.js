@@ -37,7 +37,7 @@ class Axis extends React.Component {
     
     return <g transform={`translate(${this.props.left}, ${this.props.top})`}>
               <g ref={this.myAxis}></g>
-              {this.props.label && this.props.label.show &&
+              {this.props.label && this.props.label.showLabel &&
                <text transform={`translate(${this.props.label.left}, ${this.props.label.top})${rotate}`} style={{textAnchor: "middle"}}>
                  {this.props.label.text}
                </text>

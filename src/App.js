@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import bigsData from './data/processData'
 import RaceTitle from './components/RaceTitle.js'
 import RaceRoster from './components/RaceRoster.js'
-import LapTimeLines from './components/LapTimeLines.js'
+import TimeLinesBrushable from './components/TimeLinesBrushable.js'
+import TimeLinesHoverable from './components/TimeLinesHoverable.js'
+
 
 class App extends Component {
   constructor() {
@@ -54,26 +56,23 @@ class App extends Component {
           onClick={this.onClickBib}
         />
         <div style= {{width: "700px"}}>
-          <LapTimeLines 
+          <TimeLinesHoverable 
             data = {bigsData.data}
             width = {700}
             height = {250}
             margins = {{top: 30, right: 50, bottom: 20, left: 50}}
-            drawAxis = {[{axis: "left", label: true}, {axis: "bottom", label: false}]}
             hoveredBib = {this.state.hoveredBib}
             selectedBibs = {this.state.selectedBibs}
-            brushedLaps = {this.state.brushedLaps}
+            xRange = {this.state.brushedLaps}
             actionOnMouseOver = {true}
           />
-          <LapTimeLines 
+          <TimeLinesBrushable
             data = {bigsData.data}
             width = {700}
             height = {70}
             margins = {{top: 0, right: 50, bottom: 35, left: 50}}
-            drawAxis = {[{axis: "bottom", label: true}]}
             hoveredBib = {this.state.hoveredBib}
             selectedBibs = {[]}
-            brush = {true}
             onBrush = {this.onBrushLaps}
           />
         </div>

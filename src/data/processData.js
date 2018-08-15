@@ -18,6 +18,7 @@ runnersData.forEach(runner => {
   runner.runner.age = +runner.runner.age
   runner.laps.forEach(lap => {
     lap.time = moment.duration(`00:${lap.time}`)
+    lap.string = moment(lap.time.as('milliseconds')).format('mm:ss')
   })
   
   // add some stats for runner
