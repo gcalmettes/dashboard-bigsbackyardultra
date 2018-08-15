@@ -1,4 +1,5 @@
 import React from 'react';
+import {colorsSelected} from './Colors.js'
 
 
 class HoverRunnersLeftLayer extends React.Component {
@@ -43,6 +44,7 @@ class HoverRunnersLeftLayer extends React.Component {
 
     const currentLap = Math.floor(xScale.invert(this.state.mouseX))
 
+    let countSelected = 0
     const selectedRunnersInfo = data
       .reduce((acc, runner) => {
         if (selectedBibs.includes(`${runner.bib}`)) {
@@ -51,9 +53,11 @@ class HoverRunnersLeftLayer extends React.Component {
               {
                 x: xScale(lap.lap),
                 y: yScale(lap.time.asMinutes()),
-                string: lap.string
+                string: lap.string,
+                color: colorsSelected[countSelected]
               }
             ))
+          countSelected += 1
           acc = [...acc, ...runnerLap]
         }
         return acc
@@ -85,7 +89,7 @@ class HoverRunnersLeftLayer extends React.Component {
               <circle 
                 cx = {info.x} 
                 cy = {info.y} 
-                fill = {"white"}
+                fill = {info.color}
                 stroke = {"black"} 
                 r = {3}
               />

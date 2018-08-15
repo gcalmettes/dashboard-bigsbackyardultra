@@ -4,6 +4,7 @@ import MultiLines from './subComponents/MultiLines.js';
 import Axis from './subComponents/Axis.js';
 import HoverRunnersLeftLayer from './subComponents/HoverRunnersLeftLayer.js'
 import RunnerStatsLayer from './subComponents/RunnerStatsLayer.js'
+import {linesColorScale} from './subComponents/Colors.js'
 
 import {scaleLinear as d3scaleLinear} from 'd3-scale';
 
@@ -20,8 +21,10 @@ const TimeLinesHoverable = (props) => {
 
   const xScale = d3scaleLinear().domain(xScaleRange).range([0, innerWidth])
   const yScale = d3scaleLinear().domain([30, 60]).range([innerHeight, 0])
-  const colorScale = d3scaleLinear().range(["yellow", "red"]).domain([0, getMax(data, "numberOfLaps")])
-
+  const colorScale = d3scaleLinear()
+    .domain(linesColorScale.domain().map(d => d*getMax(data, "numberOfLaps")))
+    .range(linesColorScale.range())
+  
   return (
     <SVGcontainer width={width} height={height} margins={margins}>
       <defs>

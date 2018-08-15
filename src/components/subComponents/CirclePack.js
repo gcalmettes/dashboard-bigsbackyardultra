@@ -2,6 +2,7 @@ import React from 'react';
 import {stratify as d3stratify, 
         pack as d3pack} from 'd3-hierarchy'
 import CirclePackTooltip from './CirclePackTooltip.js'
+import {colorsSelected, colorsHash} from './Colors.js'
 
 const isHovered = (node, hoveredBib) => node.id === hoveredBib
 const isSelected = (node, selectedBibs) => selectedBibs && selectedBibs.includes(node.id)
@@ -38,13 +39,6 @@ const getRunnerCircle = (node, isHovered, fill, strokeColor, strokeWidth, opacit
   )
 }
 
-const colors = {
-  'M': '#aad28c',
-  'F': '#ffc38a',
-  selectedStroke: "red",
-  hoveredFill: "#49ABF3"
-}
-
 const CirclePack = (props) => {
 
   const {runnersData, margins, hoveredBib, selectedBibs, onHover, onClick} = props
@@ -70,18 +64,25 @@ const CirclePack = (props) => {
   pack(root)
 
   let hoveredRunner = [],
-      runners = []
+      runners = [],
+      countSelected = 0
 
   root.descendants().forEach(node => {
     const isNodeSelected = isSelected(node, selectedBibs)
     const isNodeHovered = isHovered(node, hoveredBib)
 
+    let colorStroke = "black"
+    if (isNodeSelected) {
+      colorStroke = colorsSelected[countSelected]
+      countSelected += 1
+    }
+
     if (isNodeHovered) {
       hoveredRunner.push(
         getRunnerCircle(
           node, true, 
-          node.depth !== 0 ? colors["hoveredFill"] : "None", 
-          isNodeSelected ? colors['selectedStroke'] : "black",
+          node.depth !== 0 ? colorsHash["hoveredFill"] : "None", 
+          colorStroke,
           isNodeSelected ? 4 : 1, 
           1, onHover, onClick
         )
@@ -93,8 +94,8 @@ const CirclePack = (props) => {
       runners.push(
         getRunnerCircle(
           node, false, 
-          node.depth !== 0 ? colors[node.data.runner.gender] : "white", 
-          isNodeSelected ? colors['selectedStroke'] : "black",
+          node.depth !== 0 ? colorsHash[node.data.runner.gender] : "white", 
+          colorStroke,
           isNodeSelected ? 4 : 1, 
           hoveredBib ? 0.3 : 1,
           onHover, onClick

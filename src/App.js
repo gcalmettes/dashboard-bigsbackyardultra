@@ -17,6 +17,7 @@ class App extends Component {
     this.onHoverBib = this.onHoverBib.bind(this)
     this.onBrushLaps = this.onBrushLaps.bind(this)
     this.onClickBib = this.onClickBib.bind(this)
+
   }
 
   onHoverBib(bib){
@@ -49,9 +50,6 @@ class App extends Component {
           margins = {{top: 20, right: 20, bottom: 20, left: 20}}
           width = {300}
           height = {300}
-          colorHash = {{'M': '#aad28c',
-                        'F': '#ffc38a'
-                      }}
           onHover={this.onHoverBib}
           onClick={this.onClickBib}
         />
