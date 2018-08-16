@@ -1,10 +1,9 @@
 import React from 'react';
 import {line as d3line,
         curveCatmullRom as d3curveCatmullRom} from 'd3-shape';
-import {colorsSelected} from './Colors.js'
 
 const isHovered = (runner, hoveredBib) => runner.bib === parseInt(hoveredBib, 10)
-const isSelected = (runner, selectedBibs) => selectedBibs && selectedBibs.includes(`${runner.bib}`)
+const isSelected = (runner, selectedBibs) => selectedBibs[`${runner.bib}`]
 
 const getRunnerPath = (runner, path, color, strokeWidth, opacity) => {
   return <path 
@@ -28,7 +27,7 @@ const MultiLines = (props) => {
 
   let timeLines
 
-  if (selectedBibs.length <= 0) {
+  if (!Object.keys(selectedBibs).length) {
     // If no selection, draw timeLines of all runners in colors
     // add hovered runner in black on top
     const nonSelected = [],
@@ -53,8 +52,6 @@ const MultiLines = (props) => {
           selected = [],
           hovered = []
 
-    let countSelected = 0
-
     data.forEach(runner => {
       const isRunnerSelected = isSelected(runner, selectedBibs)
       const isRunnerHovered = isHovered(runner, hoveredBib)
@@ -62,8 +59,7 @@ const MultiLines = (props) => {
       if (isRunnerHovered) {
         hovered.push(getRunnerPath(runner, line(runner.laps), 'black', 2, 1))
       } else if (isRunnerSelected) {
-        selected.push(getRunnerPath(runner, line(runner.laps), colorsSelected[countSelected], 2, 1))
-        countSelected += 1
+        selected.push(getRunnerPath(runner, line(runner.laps), isRunnerSelected, 2, 1))
       } else {
         nonSelected.push(getRunnerPath(runner, line(runner.laps), 'gray', 1, 0.3))
       }

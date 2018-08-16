@@ -4,7 +4,8 @@ import RaceTitle from './components/RaceTitle.js'
 import RaceRoster from './components/RaceRoster.js'
 import TimeLinesBrushable from './components/TimeLinesBrushable.js'
 import TimeLinesHoverable from './components/TimeLinesHoverable.js'
-
+import {Stack} from './components/subComponents/Stack.js'
+import {colorsSelected} from './components/subComponents/Colors.js'
 
 class App extends Component {
   constructor() {
@@ -12,8 +13,11 @@ class App extends Component {
     this.state = {
       hoveredBib: null,
       brushedLaps: null,
-      selectedBibs: []
+      selectedBibs: {}
     }
+    
+    this.colorStack = new Stack(colorsSelected)
+
     this.onHoverBib = this.onHoverBib.bind(this)
     this.onBrushLaps = this.onBrushLaps.bind(this)
     this.onClickBib = this.onClickBib.bind(this)
@@ -25,10 +29,18 @@ class App extends Component {
   }
 
   onClickBib(bib){
-    if (this.state.selectedBibs.includes(bib)) {
-      this.setState({selectedBibs: this.state.selectedBibs.filter(d => d !== bib)})
+    if (this.state.selectedBibs[`${bib}`]) {
+      // put back color in stack
+      this.colorStack.push(this.state.selectedBibs[`${bib}`])
+      // filter out selected
+      const filtered = Object.keys(this.state.selectedBibs)
+        .filter(key => key !== `${bib}`)
+        .reduce((obj, key) => ({...obj, [key]: this.state.selectedBibs[key]}), {});
+      this.setState({selectedBibs: filtered})
     } else {
-      this.setState({selectedBibs: [...this.state.selectedBibs, bib]})
+      const newSelection = {}
+      newSelection[`${bib}`] = this.colorStack.pop()
+      this.setState({selectedBibs: {...newSelection, ...this.state.selectedBibs}})
     }
   }
 
@@ -62,7 +74,6 @@ class App extends Component {
             hoveredBib = {this.state.hoveredBib}
             selectedBibs = {this.state.selectedBibs}
             xRange = {this.state.brushedLaps}
-            actionOnMouseOver = {true}
           />
           <TimeLinesBrushable
             data = {bigsData.data}
