@@ -2,6 +2,9 @@ import React from 'react';
 import {colorsSelected} from './Colors.js'
 
 
+// const dayOrNight = (lap) => (Math.floor(lap/12)%2 === 0 ? 1 : 2)
+const dayOrNight = (lap) => Math.floor((lap-1)/12)%2 === 0 ? "🏞️" : "🌃"
+
 class HoverRunnersLeftLayer extends React.Component {
   constructor(props){
     super(props)
@@ -42,7 +45,7 @@ class HoverRunnersLeftLayer extends React.Component {
       return sum
       }, 0)
 
-    const currentLap = Math.floor(xScale.invert(this.state.mouseX))
+    const currentLap = Math.floor(xScale.invert(this.state.mouseX))+1
 
     let countSelected = 0
     const selectedRunnersInfo = data
@@ -74,7 +77,7 @@ class HoverRunnersLeftLayer extends React.Component {
           y={height-30} 
           textAnchor = {this.state.mouseX <= width/2 ? "start" : "end"} 
           style={this.getStyle()}>
-            {`Lap ${currentLap} (${(currentLap*4.16666).toFixed(2)}mi)`}
+            {`Lap ${currentLap} ${dayOrNight(currentLap)} (${(currentLap*4.16666).toFixed(2)}mi)`}
         </text>
         <text 
           x={this.state.mouseX <= width/2 ? this.state.mouseX + 10 : this.state.mouseX - 10} 

@@ -17,7 +17,7 @@ const TimeLinesBrushable = (props) => {
         innerHeight = height-margins.top-margins.bottom
 
   const xScale = d3scaleLinear().domain([0, getMax(data, "numberOfLaps")+1]).range([0, innerWidth])
-  const yScale = d3scaleLinear().domain([30, 60]).range([innerHeight, 0])
+  const yScale = d3scaleLinear().domain([32, 60]).range([innerHeight, 0])
   const colorScale = d3scaleLinear()
     .domain(linesColorScale.domain().map(d => d*getMax(data, "numberOfLaps")))
     .range(linesColorScale.range())

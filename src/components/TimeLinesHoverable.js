@@ -20,7 +20,7 @@ const TimeLinesHoverable = (props) => {
   const xScaleRange = xRange ? xRange : [0, getMax(data, "numberOfLaps")+1]
 
   const xScale = d3scaleLinear().domain(xScaleRange).range([0, innerWidth])
-  const yScale = d3scaleLinear().domain([30, 60]).range([innerHeight, 0])
+  const yScale = d3scaleLinear().domain([32, 60]).range([innerHeight, 0])
   const colorScale = d3scaleLinear()
     .domain(linesColorScale.domain().map(d => d*getMax(data, "numberOfLaps")))
     .range(linesColorScale.range())
