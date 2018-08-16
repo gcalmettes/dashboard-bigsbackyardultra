@@ -1,13 +1,13 @@
 import {scaleLinear as d3scaleLinear} from 'd3-scale';
 
 export const colorsSelected = [
-  "#e41a1c",
-  "#377eb8",
-  "#984ea3",
-  "#ff7f00",
-  "#a65628",
+  "#999999",
   "#f781bf",
-  "#999999"
+  "#a65628",
+  "#ff7f00",
+  "#984ea3",
+  "#377eb8",
+  "#e41a1c"
 ]
 
 export const colorsHash = {
