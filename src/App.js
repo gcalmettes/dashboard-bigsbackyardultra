@@ -4,6 +4,7 @@ import RaceTitle from './components/RaceTitle.js'
 import RaceRoster from './components/RaceRoster.js'
 import TimeLinesBrushable from './components/TimeLinesBrushable.js'
 import TimeLinesHoverable from './components/TimeLinesHoverable.js'
+import RunnersCumSumTime from './components/RunnersCumSumTime.js'
 import {Stack} from './components/subComponents/Stack.js'
 import {colorsSelected} from './components/subComponents/Colors.js'
 
@@ -64,6 +65,13 @@ class App extends Component {
           height = {300}
           onHover={this.onHoverBib}
           onClick={this.onClickBib}
+        />
+        <RunnersCumSumTime
+          data = {bigsData.data}
+          margins = {{top: 20, right: 20, bottom: 20, left: 60}}
+          width = {300}
+          height = {300}
+          selectedBibs = {this.state.selectedBibs}
         />
         <div style= {{width: "700px"}}>
           <TimeLinesHoverable 
