@@ -39,8 +39,7 @@ class App extends Component {
         .reduce((obj, key) => ({...obj, [key]: this.state.selectedBibs[key]}), {});
       this.setState({selectedBibs: filtered})
     } else {
-      const newSelection = {}
-      newSelection[`${bib}`] = this.colorStack.pop()
+      const newSelection = {[`${bib}`]: this.colorStack.pop()}
       this.setState({selectedBibs: {...newSelection, ...this.state.selectedBibs}})
     }
   }
