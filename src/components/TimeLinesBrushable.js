@@ -6,9 +6,7 @@ import Brush from './subComponents/Brush.js'
 import {linesColorScale} from './subComponents/Colors.js'
 
 import {scaleLinear as d3scaleLinear} from 'd3-scale';
-
-
-const getMax = (array, attr) => Math.max(...array.map(d => d[attr]))
+import { getMax } from '../utils/utils.js'
 
 const TimeLinesBrushable = (props) => {
   const {data, width, height, margins, hoveredBib, selectedBibs, onBrush} = props

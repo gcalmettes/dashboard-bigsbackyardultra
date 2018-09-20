@@ -7,9 +7,8 @@ import RunnerStatsLayer from './subComponents/RunnerStatsLayer.js'
 import {linesColorScale} from './subComponents/Colors.js'
 
 import {scaleLinear as d3scaleLinear} from 'd3-scale';
+import { getMax } from '../utils/utils.js'
 
-
-const getMax = (array, attr) => Math.max(...array.map(d => d[attr]))
 
 const TimeLinesHoverable = (props) => {
   const {data, width, height, margins, hoveredBib, xRange, selectedBibs} = props

@@ -1,7 +1,7 @@
 import React from 'react';
-import { dayOrNight, isSelected } from '../../utils/utils.js'
+import { isSelected, dayOrNight } from '../../utils/utils.js'
 
-class HoverRunnersLeftLayer extends React.Component {
+class CumSumInfoLayer extends React.Component {
   constructor(props){
     super(props)
 
@@ -22,7 +22,7 @@ class HoverRunnersLeftLayer extends React.Component {
     this.setState( {mouseX: x, mouseY: y, visible: true})
   }
 
-  onMouseLeave(e){ 
+  onMouseLeave(e){
     this.setState( {visible: false})
   }
 
@@ -36,23 +36,17 @@ class HoverRunnersLeftLayer extends React.Component {
 
     const {width, height, data, xScale, yScale, selectedBibs} = this.props
 
-    const survivors = data.reduce((sum, runner) => {
-      sum += runner.numberOfLaps >= xScale.invert(this.state.mouseX)
-      return sum
-      }, 0)
-
     const currentLap = Math.floor(xScale.invert(this.state.mouseX))+1
 
     const selectedRunnersInfo = data
       .reduce((acc, runner) => {
         const selectedRunner = isSelected(runner, selectedBibs)
         if (selectedRunner) {
-          const runnerLap = runner.laps.filter(lap => lap.lap === currentLap)
+          const runnerLap = runner.cumSum.filter(lap => lap.lap === currentLap)
             .map(lap => (
               {
                 x: xScale(lap.lap),
-                y: yScale(lap.time.asMinutes()),
-                string: lap.string,
+                y: yScale(lap.runTime),
                 color: selectedRunner
               }
             ))
@@ -73,13 +67,6 @@ class HoverRunnersLeftLayer extends React.Component {
           textAnchor = {this.state.mouseX <= width/2 ? "start" : "end"} 
           style={this.getStyle()}>
             {`Lap ${currentLap} ${dayOrNight(currentLap)} (${(currentLap*4.16666).toFixed(2)}mi)`}
-        </text>
-        <text 
-          x={this.state.mouseX <= width/2 ? this.state.mouseX + 10 : this.state.mouseX - 10} 
-          y={height-10} 
-          textAnchor = {this.state.mouseX <= width/2 ? "start" : "end"} 
-          style={this.getStyle()}>
-            {`${survivors} runners survived`}
         </text>
         {selectedRunnersInfo
           .map((info, i) => (
@@ -110,4 +97,4 @@ class HoverRunnersLeftLayer extends React.Component {
   }
 }
 
-export default HoverRunnersLeftLayer
+export default CumSumInfoLayer

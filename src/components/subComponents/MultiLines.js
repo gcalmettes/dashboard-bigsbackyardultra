@@ -1,9 +1,7 @@
 import React from 'react';
 import {line as d3line,
         curveCatmullRom as d3curveCatmullRom} from 'd3-shape';
-
-const isHovered = (runner, hoveredBib) => runner.bib === parseInt(hoveredBib, 10)
-const isSelected = (runner, selectedBibs) => selectedBibs[`${runner.bib}`]
+import { isHovered, isSelected } from '../../utils/utils.js'
 
 const getRunnerPath = (runner, path, color, strokeWidth, opacity) => {
   return <path 

@@ -5,6 +5,7 @@ import RaceRoster from './components/RaceRoster.js'
 import TimeLinesBrushable from './components/TimeLinesBrushable.js'
 import TimeLinesHoverable from './components/TimeLinesHoverable.js'
 import RunnersCumSumTime from './components/RunnersCumSumTime.js'
+import HistoTime from './components/HistoTime.js'
 import {Stack} from './components/subComponents/Stack.js'
 import {colorsSelected} from './components/subComponents/Colors.js'
 
@@ -68,7 +69,7 @@ class App extends Component {
         <RunnersCumSumTime
           data = {bigsData.data}
           margins = {{top: 20, right: 20, bottom: 20, left: 60}}
-          width = {300}
+          width = {350}
           height = {300}
           selectedBibs = {this.state.selectedBibs}
         />
@@ -92,6 +93,13 @@ class App extends Component {
             onBrush = {this.onBrushLaps}
           />
         </div>
+        <HistoTime
+          data = {bigsData.data}
+          margins = {{top: 20, right: 20, bottom: 50, left: 60}}
+          width = {350}
+          height = {300}
+          selectedBibs = {this.state.selectedBibs}
+        />
       </div>
 
     );

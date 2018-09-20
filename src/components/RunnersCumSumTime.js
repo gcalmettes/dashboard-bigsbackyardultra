@@ -2,11 +2,10 @@ import React from 'react';
 import moment from 'moment'
 import SVGcontainer from './subComponents/SVGcontainer.js'
 import Axis from './subComponents/Axis.js'
+import CumSumInfoLayer from './subComponents/CumSumInfoLayer.js'
 import {line as d3line} from 'd3-shape'
 import {scaleLinear as d3scaleLinear} from 'd3-scale'
-
-const getMax = (array, attr) => Math.max(...array.map(d => d[attr]))
-const isSelected = (runner, selectedBibs) => selectedBibs[`${runner.bib}`]
+import { isSelected, getMax } from '../utils/utils.js'
 
 const getCumulativeTimesFor = (runner) => runner.laps
   .reduce((sum, lap) => {
@@ -42,7 +41,6 @@ const RunnersCumSumTime = (props) => {
   data.forEach(runner => {
     const isSelectedRunner = isSelected(runner, selectedBibs)
     if (isSelectedRunner) {
-      console.log(runner)
       runners.push({
         bib: runner.bib,
         color: isSelectedRunner,
@@ -99,6 +97,14 @@ const RunnersCumSumTime = (props) => {
                  }}
         scale = {yScale}
         orientation = "left"
+      />
+      <CumSumInfoLayer 
+        width = {innerWidth} 
+        height = {innerHeight}
+        data = {runners}
+        xScale = {xScale} 
+        yScale = {yScale}
+        selectedBibs = {selectedBibs}
       />
     </SVGcontainer>
   );

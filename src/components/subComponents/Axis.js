@@ -1,7 +1,7 @@
 import React from 'react';
-import {axisLeft as d3axisLeft,
-        axisBottom as d3axisBottom} from 'd3-axis'
-import {select as d3select} from 'd3-selection'
+import { axisLeft as d3axisLeft,
+         axisBottom as d3axisBottom } from 'd3-axis'
+import { select as d3select } from 'd3-selection'
 
 
 class Axis extends React.Component {
@@ -22,7 +22,7 @@ class Axis extends React.Component {
   }
 
   componentDidUpdate() {
-    this.props.orientation === "bottom" && this.drawAxis()
+    this.drawAxis()
   }
 
   componentDidMount() {

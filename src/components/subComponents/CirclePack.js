@@ -3,9 +3,7 @@ import {stratify as d3stratify,
         pack as d3pack} from 'd3-hierarchy'
 import CirclePackTooltip from './CirclePackTooltip.js'
 import {colorsHash} from './Colors.js'
-
-const isHovered = (node, hoveredBib) => node.id === hoveredBib
-const isSelected = (node, selectedBibs) => selectedBibs[node.id]
+import { isSelected, isHovered } from '../../utils/utils.js'
 
 const getRunnerCircle = (node, isHovered, fill, strokeColor, strokeWidth, opacity, onHover, onClick) => {
   return (
@@ -13,6 +11,7 @@ const getRunnerCircle = (node, isHovered, fill, strokeColor, strokeWidth, opacit
       key = {`circle${node.id}`} 
       onMouseMove={(node.depth !== 0) ? () => onHover(node.id) : () => onHover(null)}
       onMouseOut={() => onHover(null)}
+      onMouseLeave={() => onHover(null)}
       onClick={() => onClick(node.id)}
       opacity = {opacity}
     >
@@ -67,7 +66,7 @@ const CirclePack = (props) => {
       runners = []
 
   root.descendants().forEach(node => {
-    const isNodeSelected = isSelected(node, selectedBibs)
+    const isNodeSelected = isSelected(node, selectedBibs, true)
     const isNodeHovered = isHovered(node, hoveredBib)
 
     let colorStroke = "black"
