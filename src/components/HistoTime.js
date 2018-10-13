@@ -75,10 +75,11 @@ const HistoTime = (props) => {
       
       xScale.domain(extent)
 
-      const bins = d3histogram()
+      const binsGenerator = d3histogram()
         .domain(xScale.domain())
-        .thresholds(xScale.ticks(40))
-        (lapTimes)
+        .thresholds(xScale.ticks(40));
+        
+      const bins = binsGenerator(lapTimes)
 
       allBins = [...allBins, ...bins]
       const yScaleMax = d3max(allBins, d => d.length)

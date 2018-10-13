@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 
-import { BrowserRouter, HashRouter, Route, Switch, Link} from 'react-router-dom'
+import { HashRouter, Route, Switch, Link} from 'react-router-dom'
 
 import Dashboard from './components/Dashboard.js'
+import LazBoard from './components/LazBoard.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -33,7 +34,7 @@ class App extends Component {
           </Navbar>
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route path='/laz' component={()=> <div>Laz poetry</div>} />
+            <Route path='/laz' component={LazBoard} />
           </Switch>
         </div>
       </HashRouter>

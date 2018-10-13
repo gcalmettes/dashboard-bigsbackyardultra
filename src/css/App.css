@@ -1,9 +1,0 @@
-.App {
-  text-align: center;
-}
-
-.multilineClipped {
-  /* referencing path from external SVG */
-  clip-path: url("#multilineClip");
-  -webkit-clip-path: url("#multilineClip");
-}
