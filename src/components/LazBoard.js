@@ -63,8 +63,15 @@ class LazBoard extends Component {
     
     return (
       <div style={{'display': 'flex', 'justifyContent': 'center'}}>
-        <div style={{width: '800px', height: '150px', marginTop: "20px"}}>
-          <div className="timelineContainter" style={{ width: '100%', height: '100%'}}>
+        <div style={
+          { display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            width: '90%', 
+            marginTop: "20px"}
+        }>
+          <div className="timelineContainter" style={{width: '95%', height: '150px'}}>
             <HorizontalTimeline
               index={this.state.item}
               indexClick={this.onChangeView}
@@ -88,7 +95,7 @@ class LazBoard extends Component {
               getLabel={timelineConfig.getLabel}
             />
           </div>
-          <div>
+          <div style={{ width: '85%', height: '100%', marginLeft: 'auto'}}>
             <SwipeableViews
               index={this.state.item}
               onChangeIndex={this.onChangeView}
