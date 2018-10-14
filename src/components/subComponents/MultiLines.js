@@ -32,7 +32,7 @@ const MultiLines = (props) => {
           hovered = []
 
     data.forEach(runner => {
-      const isRunnerHovered = isHovered(runner, hoveredBib)
+      const isRunnerHovered = isHovered({id: `${runner.bib}`}, hoveredBib)
       if (isRunnerHovered) {
         hovered.push(getRunnerPath(runner, line(runner.laps), 'black', 2, 1))
       } else {
@@ -52,8 +52,7 @@ const MultiLines = (props) => {
 
     data.forEach(runner => {
       const isRunnerSelected = isSelected(runner, selectedBibs)
-      const isRunnerHovered = isHovered(runner, hoveredBib)
-
+      const isRunnerHovered = isHovered({id: `${runner.bib}`}, hoveredBib)
       if (isRunnerHovered) {
         hovered.push(getRunnerPath(runner, line(runner.laps), 'black', 2, 1))
       } else if (isRunnerSelected) {
