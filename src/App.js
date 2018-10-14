@@ -22,15 +22,18 @@ class App extends Component {
     return (
       <HashRouter>
         <div>
-          <Navbar bg="dark" variant="dark">
+          <Navbar collapseOnSelect expand='sm' bg="dark" variant="dark">
             <Navbar.Brand>BBU</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/laz">Laz</Nav.Link>
-            </Nav>
-            <Navbar.Text>
-              Big Backyard Ultra 2017
-            </Navbar.Text>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/laz">Laz</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+            <Navbar.Text className='d-none d-sm-block'>
+                Big Backyard Ultra 2017
+              </Navbar.Text>
           </Navbar>
           <Switch>
             <Route exact path='/' component={Dashboard} />
