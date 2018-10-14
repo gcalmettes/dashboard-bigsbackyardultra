@@ -1,9 +1,15 @@
 import React from 'react';
 
-const CirclePackTooltip = (props) => {
-  const {node} = props
+const RosterTooltip = (props) => {
+  const {node, width} = props
+  const xShift = (node.x < width-100)
+    ? node.x + node.r + 10
+    : node.x - node.r - 10
+  const yShift = node.y < 70 
+    ? node.y + node.r + 70
+    : node.y
   return ((node.depth !==0) &&
-    <g transform = {`translate(${node.y > 35 ? node.x : node.x + node.r + 30}, ${node.y > 35 ? node.y : node.y + 35})`}>
+    <g transform = {`translate(${xShift}, ${yShift})`}>
       <text
         y={`-${35+node.r}px`}
         style={{
@@ -27,4 +33,4 @@ const CirclePackTooltip = (props) => {
   );
 }
 
-export default CirclePackTooltip
+export default RosterTooltip

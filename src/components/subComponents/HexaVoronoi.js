@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CirclePackTooltip from './CirclePackTooltip.js'
+import RosterTooltip from './RosterTooltip.js'
 import {colorsHash} from './Colors.js'
 import { isSelected, isHovered } from '../../utils/utils.js'
 
@@ -142,7 +142,7 @@ class HexaVoronoi extends React.Component {
 
       if (addTooltip) {
         tooltip.push(
-          <CirclePackTooltip node={{depth: 1, x: p.site.x, y: p.site.y, r: Math.sqrt(p.site.weight), data: runner}} key={`tooltip-${runner.bib}`}/>
+          <RosterTooltip node={{depth: 1, x: p.site.x, y: p.site.y, r: Math.sqrt(p.site.weight), data: runner}} key={`tooltip-${runner.bib}`}/>
         )
       } 
 
@@ -157,7 +157,7 @@ class HexaVoronoi extends React.Component {
         )
       )
       tooltip.push(
-        <CirclePackTooltip node={{depth: 1, x: p.site.x, y: p.site.y, r: Math.sqrt(p.site.weight), data: runner}} key={`tooltip-${runner.bib}`}/>
+        <RosterTooltip node={{depth: 1, x: p.site.x, y: p.site.y, r: Math.sqrt(p.site.weight), data: runner}} width={width} key={`tooltip-${runner.bib}`}/>
       )
     } else {
       runners.push(
