@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import bigsData from './../data/processData'
-import RaceRoster from './RaceRoster.js'
+import RaceRosterHexa from './RaceRosterHexa.js'
 import TimeLinesBrushable from './TimeLinesBrushable.js'
 import TimeLinesHoverable from './TimeLinesHoverable.js'
 import RunnersCumSumTime from './RunnersCumSumTime.js'
@@ -52,7 +52,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <RaceRoster 
+        <RaceRosterHexa
           runnersData={bigsData.data} 
           hoveredBib = {this.state.hoveredBib} 
           selectedBibs = {this.state.selectedBibs}
