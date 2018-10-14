@@ -95,7 +95,7 @@ class LazBoard extends Component {
               getLabel={timelineConfig.getLabel}
             />
           </div>
-          <div style={{ width: '85%', height: '100%', marginLeft: 'auto'}}>
+          <div style={{ width: '95%', height: '100%', marginLeft: 'auto'}}>
             <SwipeableViews
               index={this.state.item}
               onChangeIndex={this.onChangeView}
