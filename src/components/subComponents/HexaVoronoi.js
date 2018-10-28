@@ -32,6 +32,7 @@ const getRunnerCell = (polygon, isHovered, fill, strokeColor, strokeWidth, opaci
   const runner = polygon.site.originalObject.data.originalData
   return (
     <g transform={`translate(${polygon.site.x}, ${polygon.site.y})`} 
+      className="voronoiCell"
       key = {`vorocell-${runner.bib}`} 
       onMouseMove={() => onHover(`${runner.bib}`)}
       onMouseOut={() => onHover(null)}
