@@ -8,15 +8,10 @@ body {
   white-space: pre-line;
 }
 
-.events-wrapper {
-  /*margin-top: 50px !important;*/
-  /*overflow: visible !important;*/
-}
-
-/*li {
-  top: 80% !important;
-}*/
-
 div.events {
   top: 80px !important;
+}
+
+.voronoiCell {
+  cursor: pointer;
 }
