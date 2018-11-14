@@ -14,12 +14,12 @@
     "d3-voronoi-map": "^2.0.0",
     "gh-pages": "^1.2.0",
     "moment": "^2.22.2",
-    "react": "^16.5.2",
-    "react-bootstrap": "^1.0.0-beta.1",
-    "react-dom": "^16.5.2",
+    "react": "^16.6.3",
+    "react-bootstrap": "^1.0.0-beta.3",
+    "react-dom": "^16.6.3",
     "react-horizontal-timeline": "^1.5.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.1",
     "react-swipeable-views": "^0.13.0",
     "seedrandom": "^2.4.4"
   },
@@ -30,5 +30,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
